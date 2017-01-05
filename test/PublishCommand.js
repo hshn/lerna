@@ -241,7 +241,10 @@ describe("PublishCommand", () => {
           { args: ["cd " + escapeArgs(path.join(testDir, "packages/package-4")) + " && npm publish --tag lerna-temp"] }
         ]],
         [ChildProcessUtilities, "execSync", {}, [
-          { args: ["git checkout -- packages/*/package.json"] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-1/package.json"))] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-2/package.json"))] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-3/package.json"))] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-4/package.json"))] },
 
           { args: ["npm dist-tag ls package-1"], returns: "lerna-temp: 1.0.0-alpha.81e3b443" + EOL + "stable: 1.0.0" },
           { args: ["npm dist-tag rm package-1 lerna-temp"] },
@@ -330,7 +333,10 @@ describe("PublishCommand", () => {
           { args: ["cd " + escapeArgs(path.join(testDir, "packages/package-4")) + " && npm publish --tag lerna-temp"] }
         ]],
         [ChildProcessUtilities, "execSync", {}, [
-          { args: ["git checkout -- packages/*/package.json"] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-1/package.json"))] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-2/package.json"))] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-3/package.json"))] },
+          { args: ["git checkout -- " + escapeArgs(path.join(testDir, "packages/package-4/package.json"))] },
 
           { args: ["npm dist-tag ls package-1"], returns: "lerna-temp: 1.0.0-alpha.81e3b443" + EOL + "stable: 1.0.0" },
           { args: ["npm dist-tag rm package-1 lerna-temp"] },
